@@ -19,7 +19,7 @@ const InputTask = () => {
     const description = data.description;
     console.log(name, description)
 
-    fetch('http://localhost:5000/todo', {
+    fetch('https://calm-cove-04670.herokuapp.com/todo', {
         method: 'POST',
         body: JSON.stringify({name, description }),
         headers: {

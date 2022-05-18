@@ -5,14 +5,17 @@ import Home from './components/Home/Home';
 import Header from './components/Header/Header';
 import InputTask from './components/InputTask/InputTask';
 import AvailableTodo from './components/Card/AvailableTodo';
+import RequireAuth from './components/Require/RequireAuth';
+import Login from './components/Login';
 
 function App() {
   return (
     <div className="">
       <Header></Header>
-      <InputTask></InputTask>
       <Routes>
-        <Route path='/' element={<AvailableTodo/>}></Route>
+        <Route path='/' element={<RequireAuth><Home/></RequireAuth>}></Route>
+        <Route path='login' element={<Login></Login>}></Route>
+
       </Routes>
     
     </div>

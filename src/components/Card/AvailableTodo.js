@@ -8,13 +8,13 @@ const AvailableTodo = () => {
 
     useEffect(() => {
 
-        fetch("http://localhost:5000/todos")
+        fetch("https://calm-cove-04670.herokuapp.com/todos")
             .then(res => res.json())
             .then(data => setNotes(data))
     }, [isReload]);
 
     const handleDelete = (id) => {
-        fetch(`http://localhost:5000/todo/${id}`, {
+        fetch(`https://calm-cove-04670.herokuapp.com/todo/${id}`, {
             method: 'DELETE',
         })
             .then(res => res.json())
