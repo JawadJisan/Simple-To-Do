@@ -1,10 +1,9 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
-import { Link } from 'react-router-dom';
 
 const InputTask = () => {
 
-  const { register, formState: { errors }, handleSubmit } = useForm();
+  const { register, formState: { errors }, handleSubmit, reset } = useForm();
 
   
 //   const navigate = useNavigate();
@@ -14,7 +13,27 @@ const InputTask = () => {
 
 
   const onSubmit = data => {
+      
     console.log(data)
+    const name = data.taskName;
+    const description = data.description;
+    console.log(name, description)
+
+    fetch('http://localhost:5000/todo', {
+        method: 'POST',
+        body: JSON.stringify({name, description }),
+        headers: {
+          'Content-type': 'application/json'
+        },
+      })
+      .then(res => res.json())
+      .then(data=> {
+        alert(`You Have Successfully Added ${name}` )  
+        console.log(data)
+        reset()
+      })
+
+
 
 };
 
@@ -32,7 +51,7 @@ const InputTask = () => {
           <form onSubmit={handleSubmit(onSubmit)}>
             <div className="form-control w-full max-w-xs">
               <input type="text" placeholder="Task Name" className="input input-bordered w-full max-w-xs"
-              {...register("text", {
+              {...register("taskName", {
                 required:{
                   value: true,
                   message: 'Text Name is Required'
@@ -41,26 +60,26 @@ const InputTask = () => {
               })}
               />
               <label className="label">
-              {errors.text?.type === 'required' && <span className="label-text-alt text-red-600">{errors.email.message} </span>}
+              {errors?.taskName?.type === 'required' && <span className="label-text-alt text-red-600">{errors?.taskName?.message} </span>}
               </label>
             </div>
 
             <div className="form-control w-full max-w-xs">
               
               <input type="text" placeholder="Task Description" className="input input-bordered w-full max-w-xs"
-              {...register("password", {
+              {...register("description", {
                 required:{
                   value: true,
-                  message: 'Password is Required'
+                  message: 'Task Description is Required'
                 },
               })}
               />
               <label className="label">
-              {errors.password?.type === 'required' && <span className="label-text-alt text-red-600">{errors.password.message} </span>}                
+              {errors.description?.type === 'required' && <span className="label-text-alt text-red-600">{errors?.description?.message} </span>}                
               </label>
             </div>
 
-            <input className='btn w-full max-w-xs' value='Login' type="submit" />
+            <input className='btn w-full max-w-xs' value='Add Task ' type="submit" />
           </form>
         </div>
       </div>

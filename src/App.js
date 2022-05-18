@@ -4,6 +4,7 @@ import { Route, Routes } from 'react-router-dom';
 import Home from './components/Home/Home';
 import Header from './components/Header/Header';
 import InputTask from './components/InputTask/InputTask';
+import AvailableTodo from './components/Card/AvailableTodo';
 
 function App() {
   return (
@@ -11,7 +12,7 @@ function App() {
       <Header></Header>
       <InputTask></InputTask>
       <Routes>
-        <Route path='/' element={<Home/>}></Route>
+        <Route path='/' element={<AvailableTodo/>}></Route>
       </Routes>
     
     </div>
